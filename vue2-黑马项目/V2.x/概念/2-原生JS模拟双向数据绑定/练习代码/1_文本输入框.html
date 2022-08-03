@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本输入框</title>
+</head>
+
+<body>
+    <span>输入值-控制台打印变量</span>
+    <input type="text" id="myP" oninput="inputFn()">
+</body>
+<script>
+    // data对象
+    let data = {
+        msg: "起始值"
+    }
+    // vm实例
+    let vm = {}
+    // 1. 变量 -> 视图  (依赖Object.defineProperty劫持对象属性值的变化)
+    // (1): vm实例添加同名的属性(影子)
+    Object.defineProperty(vm, 'msg', {
+        set(val){ // 给vm的msg属性赋值, 就会触发set方法(val值就是要给vm.msg赋予的值)
+            data['msg'] = val
+            // (2): set中影响对应视图
+            document.getElementById("myP").value = val;
+        },
+        get(){ // 给vm的msg属性取值
+            return data['msg']
+        }
+    })
+    // 2. 视图 -> 变量 (依赖input事件/change事件)
+    function inputFn(ev){
+        ev = ev || window.event;
+        vm.msg = ev.target.value; // 把视图值赋予vue变量
+    }
+    // 默认值显示
+    vm.msg = data.msg
+    
+    
+</script>
+
+</html>

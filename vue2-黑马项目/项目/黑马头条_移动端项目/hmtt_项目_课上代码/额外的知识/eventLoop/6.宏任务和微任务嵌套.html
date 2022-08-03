@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 例如: 同步+异步+宏任务+微任务+嵌套
+        console.log(1);
+        if (true) {
+            console.log(2);
+        }
+        setTimeout(() => {
+            console.log(3);
+            let p = new Promise((resolve, reject) => {
+                resolve(15)
+            })
+            p.then(res => {
+                console.log(res);
+            })
+        }, 0)
+        for (let i = 0; i < 1; i++) {
+            console.log(4);
+        }
+        console.log(5);
+        document.onclick = function(){
+            console.log(6);
+        }
+        console.log(7);
+        let p = new Promise((resolve, reject) => {
+            resolve(8)
+            setTimeout(() => {
+                console.log(16);
+            }, 0)
+        })
+        p.then(res => {
+            console.log(res);
+        })
+        console.log(9);
+    </script>
+    <script>
+        console.log(10)
+        if (false) {
+            console.log(11);
+        }
+        setTimeout(() => {
+            console.log(12);
+        }, 0)
+        let p2 = new Promise((resolve, reject) => {
+            resolve(13)
+        })
+        async function myFn(){
+            const res = await p2
+            console.log(res);
+        }
+        myFn()
+        console.log(14);
+
+        // 重点: 知道函数调用时机, 什么时候函数体装入任务队列
+        // 空闲时->事件循环调度任务队列
+        // 先执行微任务, 再执行下一个宏任务
+    </script>
+</body>
+</html>

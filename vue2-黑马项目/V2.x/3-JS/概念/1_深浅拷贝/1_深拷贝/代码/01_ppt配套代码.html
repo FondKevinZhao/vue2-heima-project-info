@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ppt配套代码</title>
+</head>
+<body>
+    <script>
+
+        // 1. 数组拷贝-多层问题 
+        let arr = ["小刘", "小明", ["小花"]];
+        let brr = [...arr];
+        arr[2].push("小黑")
+        console.log(brr);
+
+        // 2. 对象拷贝-多层问题
+        let obj = {
+            name: "小明",
+            age: 18,
+            family: {
+                fName: "王"
+            }
+        }
+        let obj2 = {...obj};
+        obj.family.fName = "赵";
+        console.log(obj2.family.fName);
+
+
+        
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>练习 - 网页时钟</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .clock {
+      width: 600px;
+      height: 600px;
+      background: url(./images/clock.jpg) no-repeat;
+      margin: 50px auto 0;
+      position: relative;
+    }
+
+    .hh,
+    .mm,
+    .ss {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: url(./images/hour.png) no-repeat center;
+    }
+
+    .mm {
+      background-image: url(./images/minute.png);
+      transform: rotate(270deg);
+    }
+
+    .ss {
+      background-image: url(./images/second.png);
+      transform: rotate(30deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="clock">
+    <div class="hh" id="h"></div>
+    <div class="mm" id="m"></div>
+    <div class="ss" id="s"></div>
+  </div>
+  <script>
+    // 需求: 做个钟表
+    // 1. 准备标签和图片和样式
+    // 2. 获取标签
+    let hourDiv = document.querySelector('#h')
+    let minutesDiv = document.querySelector('#m')
+    let secondsDiv = document.querySelector('#s')
+
+    // 5. 创建计时器
+    // 注意: 计时器里的代码不会上来马上就执行的, 需要等待时间到达
+    // 函数名也可以当做变量使用和传递
+    function clock() {
+      // 3. 创建时间对象
+      let dateObj = new Date()
+      let h = dateObj.getHours()
+      let m = dateObj.getMinutes()
+      let s = dateObj.getSeconds()
+      // 4. 设置图片旋转角度
+      hourDiv.style.transform = `rotate(${h * 30 + m / 60 * 30}deg)`
+      minutesDiv.style.transform = `rotate(${m * 6 + s / 60 * 6}deg)`
+      secondsDiv.style.transform = `rotate(${s * 6}deg)`
+    }
+    clock()
+    setInterval(clock, 1000)
+  </script>
+</body>
+
+</html>

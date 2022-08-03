@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // JS把代码分为同步任务和异步任务
+        // 异步任务分为宏任务和微任务
+        // 宏任务: 交给浏览器宿主环境执行
+        // 微任务: JS引擎内划分一块空间(宿主-代码运行时环境)
+        // 宏任务: 事件绑定, ajax, 计时器定时器, (暂时script标签划分宏任务)
+        // 微任务: Promise(前端), process.nextTick(nodejs环境)
+        // 今天先探讨前端浏览器v8引擎运行环境执行顺序, nodejs(独立引擎, 执行顺序在某些情况不太一样)
+        
+        // 代码例子: (同步+异步+宏任务+微任务)-没有嵌套
+        console.log(1);
+        if (true) {
+            console.log(2);
+        }
+        setTimeout(() => {
+            console.log(3);
+        }, 0)
+        for (let i = 0; i < 1; i++) {
+            console.log(4);
+        }
+        console.log(5);
+        document.onclick = function(){
+            console.log(6);
+        }
+        console.log(7);
+        let p = new Promise((resolve, reject) => {
+            // new Promise会立刻执行函数体内代码
+            resolve(8)
+        })
+        p.then(res => {
+            console.log(res);
+        })
+        console.log(9);
+
+        // 两个队列
+        // 宏任务队列, 微任务队列
+        // 先清空当前的微任务队列, 然后在执行下一个宏任务
+        // 如果微任务队列为空, 直接执行下一给宏任务
+        // 好记: 先执行先在队列里所有微任务, 宏任务最后执行
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log(1);
+        if (true) {
+            console.log(2);
+        }
+        setTimeout(() => {
+            console.log(3);
+        }, 0)
+        for (let i = 0; i < 1; i++) {
+            console.log(4);
+        }
+        console.log(5);
+        document.onclick = function(){
+            console.log(6);
+        }
+        console.log(7);
+
+        // 事件循环(eventLoop)
+        // JS引擎执行栈空闲时, 去任务队列拿到要执行的异步函数体调用执行
+        // 执行后JS引擎再次空间, 再次去任务队列拿函数体执行, 直到清空为止
+        // 调度 -> 执行 -> 空闲 -> 调度 -> 执行 -> 空间...过程就叫事件循环
+
+        // 重要: 异步任务将要执行的 "函数体", "函数体", 进入到任务队列
+    </script>
+</body>
+</html>

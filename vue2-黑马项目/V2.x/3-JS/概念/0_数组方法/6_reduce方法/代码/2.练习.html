@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习</title>
+</head>
+<body>
+    <script>
+        // // 题目1: 求下面数组元素的和
+        // let arr = [7, 10, 3, 2]
+        // // 题目2: 把下面字符串拼接在一起
+        // let brr = ['小明', '小红', '小刘', '小李', '小赵']
+        // // 题目3: 求出每个人的年龄和
+        // let crr = [
+        //     {
+        //         name: "小明",
+        //         age: 19
+        //     },
+        //     {
+        //         name: '小红',
+        //         age: 10
+        //     },
+        //     {
+        //         name: '小青',
+        //         age: 39
+        //     },
+        //     {
+        //         name: '小爱',
+        //         age: 15
+        //     }
+        // ]
+        // // 题目4: 求出年龄小于18岁的人的年龄和
+        // let drr = [
+        //     {
+        //         name: "小明",
+        //         age: 19
+        //     },
+        //     {
+        //         name: '小红',
+        //         age: 10
+        //     },
+        //     {
+        //         name: '小青',
+        //         age: 39
+        //     },
+        //     {
+        //         name: '小爱',
+        //         age: 15
+        //     }
+        // ]
+    
+        // 题目1: 求下面数组元素的和
+        let arr = [7, 10, 3, 2]
+
+        let resultOne = arr.reduce((sum, value) => {
+            sum += value
+            return sum
+        }, 0)
+        console.log(resultOne);
+
+        // 题目2: 把下面字符串拼接在一起
+        let brr = ['小明', '小红', '小刘', '小李', '小赵']
+
+        let result2 = brr.reduce((str, value) => {
+            return str += value
+        }, '')
+        console.log(result2);
+
+
+        // 题目3: 求出每个人的年龄和
+        let crr = [
+            {
+                name: "小明",
+                age: 19
+            },
+            {
+                name: '小红',
+                age: 10
+            },
+            {
+                name: '小青',
+                age: 39
+            },
+            {
+                name: '小爱',
+                age: 15
+            }
+        ]
+        
+        let result3 = crr.reduce((ageSum, obj) => {
+           return ageSum += obj.age
+        }, 0)
+        console.log(result3);
+
+
+        // 题目4: 求出年龄小于18岁的人的年龄和
+        let drr = [
+            {
+                name: "小明",
+                age: 19
+            },
+            {
+                name: '小红',
+                age: 10
+            },
+            {
+                name: '小青',
+                age: 39
+            },
+            {
+                name: '小爱',
+                age: 15
+            }
+        ]
+
+        let result4 = drr.reduce((sum, obj) => {
+            if (obj.age <= 18) {
+                sum += obj.age;
+            }
+
+            return sum; // 无论加不加, 都要把return给下一次循环函数体独立执行时, sum的初值
+        }, 0)
+        console.log(result4);
+    
+        
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习</title>
+</head>
+<body>
+    <script>
+        // // 题目1: 遍历数组并打印
+        // let arr = [7, 10, 3, 2]
+        // // 题目2: 遍历数组每个人名, 并拼接一句", 你好"
+        // let brr = ['小明', '小红', '小刘', '小李', '小赵']
+        // // 题目3: 遍历数组里每个对象, 然后打印人名
+        // let crr = [
+        //     {
+        //         name: "小明",
+        //         age: 19
+        //     },
+        //     {
+        //         name: '小红',
+        //         age: 10
+        //     },
+        //     {
+        //         name: '小青',
+        //         age: 39
+        //     },
+        //     {
+        //         name: '小爱',
+        //         age: 15
+        //     }
+        // ]
+        // // 题目4: 遍历时, 只打印小于18岁的人的年龄
+        // let drr = [
+        //     {
+        //         name: "小明",
+        //         age: 19
+        //     },
+        //     {
+        //         name: '小红',
+        //         age: 10
+        //     },
+        //     {
+        //         name: '小青',
+        //         age: 39
+        //     },
+        //     {
+        //         name: '小爱',
+        //         age: 15
+        //     }
+        // ]
+
+        // 题目1: 遍历数组并打印
+        let arr = [7, 10, 3, 2]
+        arr.forEach(val => {
+            console.log(val)
+        })
+
+        // 题目2: 遍历数组每个人名, 并拼接一句", 你好"
+        let brr = ['小明', '小红', '小刘', '小李', '小赵']
+        brr.forEach(theName => {
+            console.log(theName + ', 你好')
+        })
+
+        // 题目3: 遍历数组里每个对象, 然后打印人名
+        let crr = [
+            {
+                name: "小明",
+                age: 19
+            },
+            {
+                name: '小红',
+                age: 10
+            },
+            {
+                name: '小青',
+                age: 39
+            },
+            {
+                name: '小爱',
+                age: 15
+            }
+        ]
+        crr.forEach(obj => {
+            console.log(obj.name)
+        })
+
+        // 题目4: 遍历时, 只打印小于18岁的人的年龄
+        let drr = [
+            {
+                name: "小明",
+                age: 19
+            },
+            {
+                name: '小红',
+                age: 10
+            },
+            {
+                name: '小青',
+                age: 39
+            },
+            {
+                name: '小爱',
+                age: 15
+            }
+        ]
+        drr.forEach(obj => {
+            if (obj.age < 18) {
+                console.log(obj.age)
+            }
+        })
+
+    </script>
+</body>
+</html>

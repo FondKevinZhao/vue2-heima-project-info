@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <input type="button" value="切换" id="btn"><br>
+    <img src="images/1.jpg" width="300" id="img">
+    <script>
+        // 目标: 点击按钮 - 随机切换图片
+        // 1. 准备标签
+        // 2. 图片路径数组
+        let imgArr = ['./images/01.gif', './images/1.jpg', './images/02.gif', './images/2.jpg', './images/3.jpg', './images/4.jpg', './images/5.jpg', './images/6.jpg']
+        // 3. 随机函数
+        function randNum(min, max){
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+        // 4. 获取标签
+        let myBtn = document.querySelector('#btn')
+        let myImg = document.querySelector('#img')
+        // 5. 按钮-点击事件
+        myBtn.addEventListener('click', function(){
+            let num = randNum(0, imgArr.length - 1)
+            myImg.src = imgArr[num]
+        })
+    </script>
+</body>
+
+</html>

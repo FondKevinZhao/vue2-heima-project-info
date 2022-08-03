@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复选框</title>
+</head>
+
+<body>
+    <span>复选框-控制台打印变量</span>
+    <h1>数组情况</h1>
+    <input type="checkbox" value='抽烟' onchange="hobbyFn()" class="box">抽烟
+    <input type="checkbox" value="喝酒" onchange="hobbyFn()" class="box">喝酒
+    <input type="checkbox" value="烫头" onchange="hobbyFn()" class="box">烫头
+    <script>
+        // 目标: js实现双向数据绑定 - 复选框
+        // 数组情况:
+        // vue中, 变量如果是数组类型, 会收集value属性的值
+        // 1. 视图 -> 变量, 标签, onchange事件, 事件处理函数
+        //   (1): 事件对象.target.value, 获取用户选中标签值
+        //   (2): (重要): 判定如果数组类型, 则添加/删除
+        // 2. 变量 -> 视图
+        //   (1): 数组里的值改变, 劫持改变. 判断value相同的checked为true否则false
+
+        // 非数组情况
+        // 1. 视图 -> 变量
+        //   (1): 事件对象.target.checked, 变量是非数组保存这个
+        // 2. 变量 -> 视图
+        //   (1): 数据劫持, 把布尔值赋给所有标签
+        let data = {
+            arr: ['喝酒']
+        }
+        let vm = {}
+
+        Object.defineProperty(vm, 'arr', {
+            set(val) { // 数组里的值去复选框们value匹配
+                if (val instanceof Array) { // vm.arr的值是数组
+                    let list = document.querySelectorAll('.box')
+                    list.forEach(el => { // 遍历每个复选框
+                        let index = val.findIndex(str => el.value === str) // 复选框value值是否在数组中
+                        el.checked = (index > -1) // 如果存在设置true/否则false
+                    })
+                    data['arr'] = val
+                } else { // vm.arr的值是布尔值
+                    let list = document.querySelectorAll('.box')
+                    list.forEach(el => {
+                        el.checked = val
+                    })
+                    data['arr'] = val
+                }
+            },
+            get () {
+                return data['arr']
+            }
+        })
+
+        function hobbyFn(e) {
+            e = e || window.event
+            let val = e.target.value //复选框的值
+            if (Array.isArray(vm.arr)) { // 判断arr里变量是否为数组类型
+                let index = vm.arr.indexOf(e.target.value) // 从数组里看看是否有这个值
+                if (index < 0) { // 找不到直接加入
+                    vm.arr.push(e.target.value)
+                } else { // 已存在-删除
+                    vm.arr = vm.arr.slice(0, index).concat(vm.arr.slice(index + 1))
+                }
+            } else { // 非数组类型直接保存标签的checked选中状态(true/false)
+                vm.arr = e.target.checked
+            }
+        }
+        
+        // 默认赋予页面
+        vm.arr = data.arr
+    </script>
+</body>
+
+</html>

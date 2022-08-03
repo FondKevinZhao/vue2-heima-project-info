@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="myDiv">
+        <img src="" alt="">
+        <div>
+            <span>span1</span>
+            <span>span2</span>
+            <span>span3</span>
+        <div>
+    </div>
+
+    <script>
+        // 需求: 获取img, 3个span标签
+        let theImg = document.querySelector('#myDiv>img')
+        console.log(theImg); // 标签对象
+
+        let spanList = document.querySelectorAll('#myDiv span')
+        console.log(spanList); // 伪数组
+    </script>
+</body>
+</html>

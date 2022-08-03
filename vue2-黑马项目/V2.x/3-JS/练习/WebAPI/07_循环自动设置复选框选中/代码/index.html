@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="checkbox">
+
+    <script>
+        // 需求: 计时器, 间隔1秒, 复选框选中/取消选中
+        // 1. 准备标签
+        // 2. 获取标签
+        let theCheck = document.querySelector('input')
+        // 3. 变量代表选中状态
+        let flag = false // 未选中
+        // 4. 创建计时器
+        setInterval(function(){
+            // 5. 标记变量取反, 设置给复选框checked
+            flag = !flag;
+            theCheck.checked = flag;
+        }, 1000)
+    </script>
+</body>
+</html>

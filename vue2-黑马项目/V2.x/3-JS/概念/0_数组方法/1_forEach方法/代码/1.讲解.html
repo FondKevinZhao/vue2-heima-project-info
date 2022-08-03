@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forEach讲解</title>
+</head>
+<body>
+    <script>
+        let arr = [10, 5, 3, 7]
+        // 目标: 快速遍历数组里每个值
+        // 语法: 
+        /*
+            数组变量.forEach(值变量名 => {
+                // ...每遍历一个值, 就传给此形参(值变量名), 执行一次此函数体, 继续遍历
+            })
+        */
+        arr.forEach(val => {
+            console.log(val);
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例_新闻列表</title>
+    <link rel="stylesheet" href="./assets/news.css">
+</head>
+
+<body>
+    <div id="news-list">
+        <!-- <div class="news-item">
+            <img class="thumb" src="" alt="">
+            <div class="right-box">
+                <h1 class="title">5G商用在即，三大运营商营收持续下降</h1>
+                <div class="tags">
+                    <span>三大运营商</span>
+                    <span>中国移动</span>
+                    <span>5G商用</span>
+                </div>
+                <div class="footer">
+                    <div>
+                        <span>新京报经济新闻</span>&nbsp;&nbsp;
+                        <span>2019-10-28 11:50:28</span>
+                    </div>
+                    <span>评论数：58</span>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <script src="./js/jquery3.5.1.js"></script>
+    <script>
+        // 2. 格式化时间
+        Date.formatTime = function (date) {
+            function padZero(n) {
+                if (n < 10) {
+                    return '0' + n
+                } else {
+                    return n
+                }
+            }
+            // 把字符串格式的日期转换为日期对象
+            var d = new Date(date)
+            var year = padZero(d.getFullYear())
+            var month = padZero(d.getMonth() + 1)
+            var day = padZero(d.getDate())
+            var hour = padZero(d.getHours())
+            var minute = padZero(d.getMinutes())
+            var second = padZero(d.getSeconds())
+            return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second
+        }
+
+
+        // 1. 请求数据铺设页面
+        var nowPage = 1;
+        function loadNewsList() {
+            $.ajax({
+                url: "http://123.57.109.30:3006/api/news",
+                data: { page: nowPage },
+                type: "GET",
+                success(res) {
+                    var arr = res.data;
+
+                    if (arr.length == 0) {
+                        alert("没有更多数据");
+                        $(document).off("scroll");
+                        return;
+                    }
+
+                    arr.forEach(function (obj, index) {
+                        var tagsArr = obj.tags.split(",");
+                        $("#news-list").append(`<div class="news-item">
+                                                    <img class="thumb" src="http://123.57.109.30:3006${obj.img}" alt="">
+                                                    <div class="right-box">
+                                                        <h1 class="title">${obj.title}</h1>
+                                                        <div class="tags">
+                                                            <span>${tagsArr[0]}</span>
+                                                            <span>${tagsArr[1]}</span>
+                                                            <span>${tagsArr[2]}</span>
+                                                        </div>
+                                                        <div class="footer">
+                                                            <div>
+                                                                <span>${obj.source}</span>&nbsp;&nbsp;
+                                                                <span>${Date.formatTime(obj.time)}</span>
+                                                            </div>
+                                                            <span>评论数：${obj.cmtcount}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>`)
+                    })
+                }
+            })
+        }
+        loadNewsList();
+
+        // 3. 监测网页是否滚动到底部
+        // 节流: 
+        // (1): 逻辑代码放到定时器中, 保存给t变量
+        // (2): 在上面做if判断, 有定时器直接return阻挡多次事件处理函数触发
+        // (3): 定时器内, 逻辑代码执行后, 把t置空
+        
+        $(document).on("scroll", throttle(function(){
+            console.log($(document).scrollTop() >= document.documentElement.scrollHeight - document.documentElement.clientHeight)
+        }))
+
+        // 优化2: 封装公共->节流函数
+        function throttle(fn) {
+            return function () { // 真正的事件处理函数 (this: 事件源)
+                if (fn.t) return;
+                fn.t = setTimeout(() => {
+                    fn.call(this) // 确保上面函数中this关键字是事件源 (fn()调用, 上面this就变成了window不对了)
+                    fn.t = null // 置空, 让事件再次触发的时候, 重新创建一个定时器
+                }, 500)
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

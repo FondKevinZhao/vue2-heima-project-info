@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p = new Promise((resolve, reject) => {
+            // 异步代码
+            setTimeout(() => {
+                resolve('返回异步成功数据')
+            }, 2000)    
+        })
+
+        // .then()里拿到成功, .catch()里拿到失败
+        // 上面resolve() => 执行.then()里函数体
+        // 上面reject() => 执行.catch()里函数体
+        // p.then(res => {
+        //     console.log(res);
+        // }).catch(err => {
+        //     console.log(err);
+        // })
+
+        // 用await拿到Promise内成功的结果
+        // 口诀: await必须用在被async修饰的函数内
+        // 原因: 异步函数内, 把代码用await转成同步流程
+        async function myFn(){
+            const res = await p;
+            console.log(res);
+        }
+        myFn()
+        
+    </script>
+</body>
+</html>

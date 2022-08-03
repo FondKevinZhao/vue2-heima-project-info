@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深拷贝讲解</title>
+</head>
+
+<body>
+    <script>
+        let oldObj = {
+            name: "小明",
+            age: 18,
+            grade: [100, 90],
+            family: {
+                fName: "王"
+            }
+        }
+
+        // 实现: 深拷贝
+        // 注意: 先写Array类型的判断(因为Array的父类是Object, 写在上面无论数组对象都会进去)
+        let newObj = {};
+        function deepClone(newO, old){
+            for (let key in old) {
+                let value = old[key]
+                if (value instanceof Array) {
+                    newO[key] = [] // 被拷贝的是数组, 创建一个新数组
+                    deepClone(newO[key], value)
+                } else if (value instanceof Object) {
+                    newO[key] = {} // 新对象
+                    deepClone(newO[key], value)
+                } else {
+                    newO[key] = value; // 基础类型, 单纯值复制
+                }
+            }
+        }
+        deepClone(newObj, oldObj);
+        oldObj.grade.push(600);
+        console.log(newObj);
+
+        // 总结: 深拷贝
+        // 递归每层引用类型, 遇到对象/数组, 创建一个新的, 把基础值复制过来
+    </script>
+</body>
+
+</html>

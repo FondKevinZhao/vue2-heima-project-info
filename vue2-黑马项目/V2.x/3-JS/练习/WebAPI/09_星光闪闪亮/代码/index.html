@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .my_div{
+            width: 400px;
+            height: 400px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="myDiv" class="my_div"></div>
+    <script>
+        // 需求: 每秒改变div背景色, 随机颜色
+        // 1. 准备标签, 获取标签
+        let myDiv = document.querySelector('#myDiv')
+        // 2. 封装函数, 产生随机颜色字符串rgb
+        function randNum(min, max){
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+        function randColor(){
+            // rgb(23, 112, 255)
+            // 注意: 每次函数调用都是独立的, 随意每次返回的值都是不一样的
+            let red = randNum(0, 255)
+            let green = randNum(0, 255)
+            let blue = randNum(0, 255)
+            return `rgb(${red}, ${green}, ${blue})`
+        }
+        // 3. 创建计时器, 每秒产生一个随机颜色字符串
+        setInterval(function(){
+            // randColor()
+            // 4. 把颜色给到div身上
+            myDiv.style.backgroundColor = randColor()
+        }, 1000)
+    </script>
+</body>
+</html>

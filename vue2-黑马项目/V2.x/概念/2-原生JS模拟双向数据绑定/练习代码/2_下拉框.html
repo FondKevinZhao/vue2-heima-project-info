@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下拉框</title>
+</head>
+<body>
+    <span>选择值-控制台打印变量</span>
+    <select id="sel" onchange="changeFn()">
+        <option value="南京">南京市</option>
+        <option value="北京">北京市</option>
+        <option value="天津">天津市</option>
+    </select>
+    <script>
+        // 目标: js实现双向数据绑定 - 下拉框
+        // 1. 视图 -> 变量, 标签, onchange事件, 事件处理函数
+        //   (1): 事件对象.target.value值 赋给变量
+        // 2. 变量 -> 视图
+        //   (1): 数据劫持变量改变, 给select设置value属性
+        //   (2): 影响select选中的option
+        let data = {
+            from: '北京'
+        }
+        let vm = {}
+        
+        Object.defineProperty(vm, 'from', {
+            set(val){
+                data['from'] = val
+                document.getElementById("sel").value = val
+            }, 
+            get(){
+                return data['from']
+            }
+        })
+
+        function changeFn(e){
+            e = e || window.event
+            vm.from = e.target.value
+        }
+
+        vm['from'] = data['from'];
+    </script>
+</body>
+
+</html>

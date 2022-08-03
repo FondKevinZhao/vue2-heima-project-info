@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>看代码回答结果_引出浅拷贝</title>
+</head>
+<body>
+    <script>
+        // 1. 请回答打印结果?
+        // let a = 100;
+        // let b = a;
+        // a = 50;
+        // console.log(b);
+
+        // // 2. 再次回答打印结果?
+        // let arr = ["小明", "小王"];
+        // let brr = arr;
+        // arr.push("黑马");
+        // console.log(brr);
+
+        // // 3. 再看这个回答结果?
+        // let obj = {
+        //     name: "小李",
+        //     age: 18
+        // }
+        // let obj2 = obj;
+        // obj.name = "小刘";
+        // console.log(obj2.name);
+
+        // 4. 拷贝:
+
+        let obj = {
+            name: "小李",
+            age: 18
+        }
+        let obj2 = {}
+        for (let key in obj) {
+            obj2[key] = obj[key]
+        }
+        // 等同于(下面二行任意一种)
+        // let obj2 = {...obj};
+        // let obj2 = Object.assign({}, obj);
+
+        obj.name = "小刘";
+        console.log(obj2.name);
+
+        // 使用场景: 操作一个数组/对象, 因为另外一个数组/对象, 想要"砍断"他们联系
+        // 总结: 浅拷贝就是把数组/对象第一层的值, 拷贝到一个全新的数组/对象中
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span id="mySpan"></span>
+    <script>
+        // 目标: 每秒切换显示菜名
+        // 1. 菜名数组
+        let nameArr = ['红烧狮子头', '锅包肉', '炒大白菜', '素味汤']
+        // 2. 获取标签
+        let theSpan = document.querySelector('#mySpan')
+        // 3. 封装一个随机数函数
+        function randNum(min, max){
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+        // 4. 创建计时器
+        setInterval(function(){
+            // 5. 随机取菜名 
+            let num = randNum(0, nameArr.length - 1)
+            let theName = nameArr[num]
+            // 6. 菜名赋予给span标签
+            theSpan.innerHTML = theName
+        }, 1000)
+    </script>
+</body>
+</html>

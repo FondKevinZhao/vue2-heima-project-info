@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>防抖函数</title>
+    <!-- 导入页面的基本样式 -->
+    <link rel="stylesheet" href="./css/index.css" />
+    <!-- 导入 jQuery -->
+    <script src="./lib/jquery.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <img src="./images/taobao_logo.png" alt="" class="logo" />
+
+        <div class="box">
+            <!-- tab 栏 -->
+            <div class="tabs">
+                <div class="tab-active">宝贝</div>
+                <div>店铺</div>
+            </div>
+            <!-- 搜索区域（搜索框和搜索按钮） -->
+            <div class="search-box">
+                <input id="ipt" type="text" class="ipt" placeholder="请输入要搜索的内容" /><button class="btnSearch">
+                    搜索
+                </button>
+            </div>
+            <!-- 搜索建议列表 -->
+            <div id="suggest-list">
+            </div>
+        </div>
+    </div>
+    <script>
+        // 问题: 搜索框只要改变就马上触发函数 执行ajax请求
+        // 实际: 用户只想搜索adidas (a, ad, adi, adid.. 但是每个字母都触发了一次网络请求(浪费资源流量/性能不高))
+        // 防抖函数目的: 提高性能(优化体验)
+
+        // 1. 把逻辑代码装入到定时器中, 设置延迟时间
+        // 2. 清空上一次定时器
+        
+        $("#ipt").on("input", debounce(function(){
+            console.log("回调函数执行了")
+        }));
+
+        // 3. 事件函数, 抽离出来
+        // 4. 逻辑代码, 让外部传入(函数体+回调)
+        function debounce(fn) {
+            let timer = null;
+            return function () {
+                clearTimeout(timer)
+                timer = setTimeout(() => {
+                    fn()
+                }, 1000)
+            }
+        }
+
+        /*
+         $.ajax({
+                url: 'http://123.57.109.30:3006/api/sug?q=' + encodeURI(kw),
+                success: function (data) {
+                    $("#suggest-list").empty();
+                    data.result.forEach(function (arr, index) {
+                        var theDiv = `<div class="suggest-item">${arr[0]}</div>`;
+                        $("#suggest-list").append(theDiv);
+                    })
+                    $("#suggest-list").show();
+                }
+            })
+        */
+    </script>
+</body>
+
+</html>

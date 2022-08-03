@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reduce讲解</title>
+</head>
+<body>
+    <script>
+        let arr = [10, 5, 3, 7]
+        // 目标: 数组的reduce方法 - 累积运算
+        // 语法: 
+        /*
+            数组变量名.reduce((sum, value) => {
+                // 向sum变量上累加值
+                // 一定要return 值给下一次循环sum初始值
+            }, 0)
+        */
+        // 执行过程: 每个值执行一次函数体, 每次函数体执行都是独立的(sum也是独立的)
+        // 返回值: 整个reduce方法在原地的结果, 最后累加的积
+        
+        let result = arr.reduce((sum, value) => {
+            sum += value
+            return sum;
+        }, 0)
+        console.log(result); // 25
+
+    </script>
+</body>
+</html>

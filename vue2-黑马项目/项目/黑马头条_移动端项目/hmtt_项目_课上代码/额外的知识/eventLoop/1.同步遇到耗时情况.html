@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="myBtn">点击弹出一句话</button>
+    <script>
+        document.getElementById('myBtn').onclick = function () {
+            alert(123)
+        }
+        // JS引擎会继续执行下面代码, 下面代码非常的耗时
+        // 验证一下, JS引擎在忙的时候(执行耗时代码, 是否会阻塞浏览器反应用户的点击动作)
+        // JS把耗时的任务, 都要放到异步任务中
+        // setTimeout(() => {
+        //     for (let i = 0; i < 5000000; i++) {
+        //         console.log(i);
+        //     }
+        // }, 100)
+    </script>
+</body>
+
+</html>

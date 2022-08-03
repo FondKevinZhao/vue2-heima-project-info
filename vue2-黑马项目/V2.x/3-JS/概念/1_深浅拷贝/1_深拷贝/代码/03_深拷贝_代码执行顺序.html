@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深拷贝讲解</title>
+</head>
+
+<body>
+    <script>
+        let oldObj = {
+            name: "小明",
+            age: 18,
+            grade: [100, 90],
+            family: {
+                fName: "王"
+            }
+        }
+        let newObj = {};
+        // function deepClone(newO, old){ // {}, 上oldObj{东西}
+        //     for (let key in old) { // key: "name", "age"
+        //         let value = old[key] // "小明", 18
+        //         if (value instanceof Array) {
+        //             newO[key] = [] 
+        //             deepClone(newO[key], value)
+        //         } else if (value instanceof Object) {
+        //             newO[key] = {} 
+        //             deepClone(newO[key], value)
+        //         } else {
+        //             newO[key] = value; // {name: "小明", age: 18}
+        //         }
+        //     }
+        // }
+        // deepClone(newObj, oldObj);
+
+        // 第三次for循环继续看
+        function deepClone(newO, old){ // {}, 上oldObj{东西}
+            for (let key in old) { // key: "name", "age", "grade", "family"
+                let value = old[key] // "小明", 18, [100, 90], {fName: "王"}
+                if (value instanceof Array) {
+                    newO[key] = []   // {name: "小明", age: 18, grade: []}
+                    deepClone(newO[key], value) // deepClone(grade后[], [100, 90]) -- 暂停for循环, 点递归执行  // {name: "小明", age: 18, grade: [100, 90]}
+                } else if (value instanceof Object) {
+                    newO[key] = {}  // {name: "小明", age: 18, grade: [], family: {}}
+                    deepClone(newO[key], value) // deepClone(family后{}, {fName: "王"}) --暂停for循环, 递归执行一次// {name: "小明", age: 18, grade: [100, 90], family: {fName: "王"}}
+                } else {
+                    newO[key] = value; // {name: "小明", age: 18}
+                }
+            }
+        }
+        deepClone(newObj, oldObj);
+
+        // 总结:
+        // 基础类型, 直接复制给新数组/对象里
+        // 对象/数组类型, 创建一个新对象/数组, 递归再遍历每个值, 复制过来
+    </script>
+</body>
+
+</html>

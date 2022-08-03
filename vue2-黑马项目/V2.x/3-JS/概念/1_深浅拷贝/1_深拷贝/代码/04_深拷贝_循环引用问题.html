@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深拷贝_循环引用问题解决</title>
+</head>
+
+<body>
+    <script>
+        let oneObj = {
+            name: 'oneObj'
+        }
+        let twoObj = {
+            name: "twoObj",
+            age: 18,
+            grade: [100, 90],
+            family: oneObj // two引用one
+        }
+
+        // one引用two(造成循环引用-互相引用)
+        oneObj.a = twoObj
+        
+
+        // 产生问题->分析我们这段代码的隐患↓
+        // 取值的时候, 一直能取到对方对象值, 递归遍历, 造成deepClone()一直再递归调用
+        // let newObj = {};
+        // function deepClone(newO, twoObj){ // {}, twoObj对象, oneObj对象
+        //     for (let key in twoObj) { // key: 'family', key: 'a'
+        //         let value = twoObj[key] // value: oneObj对象, 读到a的时候, twoObj又进来了
+        //         if (value instanceof Array) {
+        //             newO[key] = [] 
+        //             deepClone(newO[key], value)
+        //         } else if (value instanceof Object) {
+        //             newO[key] = {} 
+        //             deepClone(newO[key], value)
+        //         } else {
+        //             newO[key] = value; // {name: "小明", age: 18}
+        //         }
+        //     }
+        // }
+        // deepClone(newObj, twoObj);
+        // console.log(newObj);
+
+        // 尝试解决↓
+        // 方案: ES6: Map集合结构
+        // Map对象key可以是任意类型(对象类型)
+        let newObj = {};
+        function deepClone(newO, twoObj, map){ // {}, twoObj对象, oneObj对象
+            if (!map) {
+                map = new Map()
+            }
+            for (let key in twoObj) { // key: 'family'
+                let value = twoObj[key] // value: oneObj对象, 读到a的时候, twoObj又进来了
+                if (value instanceof Array) {
+                    newO[key] = [] 
+                    deepClone(newO[key], value)
+                } else if (value instanceof Object) {
+                    newO[key] = {} 
+                    if (!map.has(value)) { // 如果这个对象在map里出现过, 就不要再进入递归拷贝了(防止无限递归)
+                        map.set(value, 1) // map值: Map{ objObj对象: 1, twoObj对象: 1 }
+                        deepClone(newO[key], value, map)
+                    }
+                } else {
+                    newO[key] = value; 
+                }
+            }
+        }
+        deepClone(newObj, twoObj);
+        console.log(newObj);
+
+        // 总结:
+        // 在递归的时候, 判断map集合中, 是否出现过这个值的对象
+        // 没有出现过, 递归进入
+        // 出现过了, 就留下一个空数组/空对象
+    </script>
+</body>
+
+</html>

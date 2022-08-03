@@ -1,0 +1,168 @@
+# @origin = http://123.57.109.30:8000
+@origin = http://toutiao.itheima.net
+@token = Bearer fbbf3203-39f6-4e0d-86cc-50770dd364ff
+
+// 用户 - 登录
+POST {{origin}}/v1_0/authorizations
+Content-Type: application/json;charset=UTF-8
+
+{"mobile":"13900002020","code":"246810"}
+###
+
+// 用户 - 基本资料
+GET {{origin}}/v1_0/user
+Content-Type: application/json;charset=UTF-8
+Authorization: {{token}}
+###
+
+// 用户 - 个人简介
+GET {{origin}}/v1_0/user/profile
+Content-Type: application/json;charset=UTF-8
+Authorization: {{token}}
+###
+
+// 用户 - 更新头像
+PATCH {{origin}}/v1_0/user/photo
+Authorization: {{token}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="photo"; filename="1.png"
+Content-Type: image/png
+
+< ./images/Day03.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+
+// 用户 - 更新名字和年龄
+PATCH {{origin}}/v1_0/user/profile
+Authorization: {{token}}
+Content-Type: application/json;charset=UTF-8
+
+{"birthday": "2020-08-02", "name": "小可爱哈哈啊1"}
+###
+
+// 频道 - 所有频道
+GET {{origin}}/v1_0/channels
+Content-Type: application/json;charset=UTF-8
+###
+
+// 频道 - 获取用户已选
+GET {{origin}}/v1_0/user/channels
+Authorization: {{token}}
+Content-Type: application/json;charset=UTF-8
+###
+
+// 频道 - 更新用户已选
+PUT {{origin}}/v1_0/user/channels
+Authorization: {{token}}
+Content-Type: application/json;charset=UTF-8
+
+{"channels": [{"id": 4, "seq": 1}, {"id": 5, "seq": 2}, {"id": 6, "seq": 3}]}
+###
+
+// 文章 - 列表
+GET {{origin}}/v1_0/articles?timestamp=1587631729760&channel_id=0
+###
+
+// 文章 - 详情
+GET {{origin}}/v1_0/articles/8121
+Authorization: {{token}}
+###
+
+// 文章 - 不感兴趣
+POST {{origin}}/v1_0/article/dislikes
+Authorization: {{token}}
+Content-Type: application/json;charset=UTF-8
+
+{
+    "target": "8198"
+}
+###
+
+// 文章 - 举报
+POST {{origin}}/v1_0/article/reports
+Authorization: {{token}}
+Content-Type: application/json;charset=UTF-8
+
+{
+    "target": "8198",
+    "type": 11
+}
+###
+
+// 搜索 - 建议列表
+GET {{origin}}/v1_0/suggestion?q=好
+Authorization: {{token}}
+###
+
+// 搜索 - 文章结果
+GET {{origin}}/v1_0/search?q=可爱
+Authorization: {{token}}
+###
+
+// 评论 - 列表
+GET {{origin}}/v1_0/comments?type=a&source=64997
+Authorization: {{token}}
+###
+
+// 评论 - 发布
+POST {{origin}}/v1_0/comments
+Authorization: {{token}}
+Content-Type: application/json;charset=UTF-8
+
+{
+    "target": "64997",
+    "content": "我是评论内容啊",
+    "art_id": "64997" // 对评论内容发表回复, 传递所属文章id, 对文章回复评论, 不需要此参数
+}
+###
+
+// 文章 - 关注作者
+POST {{origin}}/v1_0/user/followings
+Authorization: {{token}}
+Content-Type: application/json;charset=UTF-8
+
+{
+    "target": "1111"
+}
+###
+
+// 文章 - 取消关注(作者)
+DELETE {{origin}}/v1_0/user/followings/3
+Authorization: {{token}}
+###
+
+// 文章 - 喜欢
+POST {{origin}}/v1_0/article/likings
+Authorization: {{token}}
+Content-Type: application/json;charset=UTF-8
+
+{
+    "target": "7913"
+}
+###
+
+// 文章 - 取消喜欢
+DELETE {{origin}}/v1_0/article/likings/7913
+Authorization: {{token}}
+Content-Type: application/json;charset=UTF-8
+###
+
+
+
+// 评论 - 点赞
+POST {{origin}}/v1_0/comment/likings
+Authorization: {{token}}
+Content-Type: application/json;charset=UTF-8
+
+{
+    "target": "b68b4e02-9e19-47ba-b7c9-f8e5bf215ab8"
+}
+###
+
+// 评论 - 取消点赞
+DELETE {{origin}}/v1_0/comment/likings/b68b4e02-9e19-47ba-b7c9-f8e5bf215ab8
+Authorization: {{token}}
+###
+

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <script>
+        // 需求: 把数组里名字分发给p标签内
+        // 1. 准备名字数组
+        let nameArr = ['小明', '春天', "小夏", "冬天", '哈哈']
+        // 2. 获取一组p标签
+        let pList = document.querySelectorAll('p') // NodeList [p, p, p, p, p]
+        // 3. 遍历每个p标签对象
+        for (let i = 0; i < pList.length; i++) {
+            // 4. p标签对象设置内容
+            pList[i].innerHTML = nameArr[i]
+        }
+    </script>
+</body>
+</html>

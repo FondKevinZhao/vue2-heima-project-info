@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            width: 200px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <img src="" alt="">
+    <img src="" alt="">
+    <img src="" alt="">
+    <img src="" alt="">
+    <img src="" alt="">
+
+    <script>
+        // 需求: 把图片地址, 分发给img标签
+        let imgArr = ['./images/1.webp', './images/2.webp', './images/3.webp', './images/4.webp', './images/5.webp']
+
+        let imgList = document.querySelectorAll('img') // NodeList [img, img, img, img, img]
+        for (let i = 0; i < imgList.length; i++) {
+            imgList[i].src = imgArr[i]
+        }
+    </script>
+</body>
+</html>

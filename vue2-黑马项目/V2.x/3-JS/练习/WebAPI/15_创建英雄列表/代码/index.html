@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/hero.css">
+</head>
+
+<body>
+	<a href="javascript:" id="create">创建英雄列表</a>
+	<ul class="list">
+		<!-- <li><img src="uploads/heros/01.jpg" title="司马懿"></li> -->
+	</ul>
+	<script type="text/javascript">
+		// 目标: 点击<创建英雄列表>效果
+		// 1. 准备标签和样式 - 某个li的(一套结构和样式)
+		// (核心): 数据循环, 创建这套li标签, 填入数据
+		// 2. 准备数据
+		let datas = [
+			{ name: '司马懿', imgSrc: '01.jpg' },
+			{ name: '女娲', imgSrc: '02.jpg' },
+			{ name: '百里守约', imgSrc: '03.jpg' },
+			{ name: '亚瑟', imgSrc: '04.jpg' },
+			{ name: '虞姬', imgSrc: '05.jpg' },
+			{ name: '张良', imgSrc: '06.jpg' },
+			{ name: '安其拉', imgSrc: '07.jpg' },
+			{ name: '李白', imgSrc: '08.jpg' },
+			{ name: '阿珂', imgSrc: '09.jpg' },
+			{ name: '墨子', imgSrc: '10.jpg' },
+			{ name: '鲁班', imgSrc: '11.jpg' },
+			{ name: '嬴政', imgSrc: '12.jpg' },
+			{ name: '孙膑', imgSrc: '13.jpg' },
+			{ name: '周瑜', imgSrc: '14.jpg' },
+			{ name: 'XXX', imgSrc: '15.jpg' },
+			{ name: 'XXX', imgSrc: '16.jpg' },
+			{ name: 'XXX', imgSrc: '17.jpg' },
+			{ name: 'XXX', imgSrc: '18.jpg' },
+			{ name: 'XXX', imgSrc: '19.jpg' },
+			{ name: 'XXX', imgSrc: '20.jpg' }
+		];
+		let listUL = document.querySelector('.list')
+		// 3. 获取a标签 - 点击事件
+		let createA = document.querySelector('#create')
+		createA.addEventListener('click', function () {
+			// 7. 遍历数据, 有多少个对象, 就创建多少套li
+			for (let i = 0; i < datas.length; i++) {
+				let obj = datas[i]
+				// 4. 创建标签
+				let theLi = document.createElement('li')
+				let theImg = document.createElement('img')
+				// 5. 添加标签
+				theLi.appendChild(theImg)
+				listUL.appendChild(theLi)
+				// 6. img设置内容和图片
+				theImg.src = './uploads/heros/' + obj.imgSrc
+				theImg.title = obj.name
+			}
+
+		})
+	</script>
+</body>
+
+</html>
